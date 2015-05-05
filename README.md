@@ -10,6 +10,11 @@
 
 A more literal translation is: a random name given to my Dependency Injection Framework.
 
+###Important Notes
+
+1) There is no circular dependency checking - yet.
+2) You can register multiple types to a single interface - but at the moment you get the first one registered.
+
 ###Getting Started
 
 Initialise a new container:
@@ -22,10 +27,10 @@ Add some dependencies to be resolved:
 
 ```
 // first way
-container.RegisterType<IEmailService, EmailService>(Lifetime.PerResolve);
+container.RegisterType(typeof(IEmailService), typeof(EmailService), Lifetime.PerResolve);
 
 // second way
-container.RegisterType(typeof(IEmailService), typeof(EmailService), Lifetime.PerResolve);
+container.RegisterType<IEmailService, EmailService>(Lifetime.PerResolve);
 ```
 
 Resolve a dependency:
