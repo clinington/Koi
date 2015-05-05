@@ -1,0 +1,14 @@
+c:\Users\Callum\documents\visual studio 2013\Projects\Koi\Koi.Tests\bin\Debug\Koi.Tests.dll
+c:\Users\Callum\documents\visual studio 2013\Projects\Koi\Koi.Tests\bin\Debug\Koi.Tests.pdb
+c:\Users\Callum\documents\visual studio 2013\Projects\Koi\Koi.Tests\bin\Debug\Koi.dll
+c:\Users\Callum\documents\visual studio 2013\Projects\Koi\Koi.Tests\bin\Debug\Koi.pdb
+c:\Users\Callum\documents\visual studio 2013\Projects\Koi\Koi.Tests\obj\Debug\Koi.Tests.csprojResolveAssemblyReference.cache
+c:\Users\Callum\documents\visual studio 2013\Projects\Koi\Koi.Tests\obj\Debug\Koi.Tests.dll
+c:\Users\Callum\documents\visual studio 2013\Projects\Koi\Koi.Tests\obj\Debug\Koi.Tests.pdb
+C:\Users\clinington\Documents\Visual Studio 2013\Projects\Koi\Koi.Tests\bin\Debug\Koi.Tests.dll
+C:\Users\clinington\Documents\Visual Studio 2013\Projects\Koi\Koi.Tests\bin\Debug\Koi.Tests.pdb
+C:\Users\clinington\Documents\Visual Studio 2013\Projects\Koi\Koi.Tests\bin\Debug\Koi.dll
+C:\Users\clinington\Documents\Visual Studio 2013\Projects\Koi\Koi.Tests\bin\Debug\Koi.pdb
+C:\Users\clinington\Documents\Visual Studio 2013\Projects\Koi\Koi.Tests\obj\Debug\Koi.Tests.csprojResolveAssemblyReference.cache
+C:\Users\clinington\Documents\Visual Studio 2013\Projects\Koi\Koi.Tests\obj\Debug\Koi.Tests.dll
+C:\Users\clinington\Documents\Visual Studio 2013\Projects\Koi\Koi.Tests\obj\Debug\Koi.Tests.pdb

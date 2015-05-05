@@ -1,0 +1,10 @@
+c:\users\callum\documents\visual studio 2013\Projects\Koi\Koi\bin\Debug\Koi.dll
+c:\users\callum\documents\visual studio 2013\Projects\Koi\Koi\bin\Debug\Koi.pdb
+c:\users\callum\documents\visual studio 2013\Projects\Koi\Koi\obj\Debug\Koi.dll
+c:\users\callum\documents\visual studio 2013\Projects\Koi\Koi\obj\Debug\Koi.pdb
+C:\Users\Callum\Documents\Visual Studio 2013\Projects\Koi\Koi\obj\Debug\Koi.csprojResolveAssemblyReference.cache
+C:\Users\clinington\Documents\Visual Studio 2013\Projects\Koi\Koi\bin\Debug\Koi.dll
+C:\Users\clinington\Documents\Visual Studio 2013\Projects\Koi\Koi\bin\Debug\Koi.pdb
+C:\Users\clinington\Documents\Visual Studio 2013\Projects\Koi\Koi\obj\Debug\Koi.csprojResolveAssemblyReference.cache
+C:\Users\clinington\Documents\Visual Studio 2013\Projects\Koi\Koi\obj\Debug\Koi.dll
+C:\Users\clinington\Documents\Visual Studio 2013\Projects\Koi\Koi\obj\Debug\Koi.pdb
