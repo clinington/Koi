@@ -8,9 +8,9 @@
     internal class EmptyConstructorConstructionStrategy : IConstructionStrategy
     {
         /// <summary>
-        /// The type to initialise.
+        /// The type to instantiate.
         /// </summary>
-        private Type typeToInitialise;
+        private Type typeToInstantiate;
 
         /// <summary>
         /// The construct type.
@@ -20,32 +20,32 @@
         /// </returns>
         public object ConstructType()
         {
-            return Activator.CreateInstance(this.typeToInitialise);
+            return Activator.CreateInstance(this.typeToInstantiate);
         }
 
         /// <summary>
         /// The set type.
         /// </summary>
-        /// <param name="typeToInitialise">
-        /// The type to initialise.
+        /// <param name="typeToInstantiate">
+        /// The type To Instantiate.
         /// </param>
-        public void SetType(Type typeToInitialise)
+        public void SetType(Type typeToInstantiate)
         {
-            this.typeToInitialise = typeToInitialise;
+            this.typeToInstantiate = typeToInstantiate;
         }
 
         /// <summary>
         /// The can handle.
         /// </summary>
-        /// <param name="initialisationStrategy">
-        /// The initialisation strategy.
+        /// <param name="instantiationStrategy">
+        /// The instantiation Strategy.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool CanHandle(InitialisationStrategy initialisationStrategy)
+        public bool CanHandle(InstantiationStrategy instantiationStrategy)
         {
-            return initialisationStrategy == InitialisationStrategy.LifetimeControlled;
+            return instantiationStrategy == InstantiationStrategy.LifetimeControlled;
         }
     }
 }

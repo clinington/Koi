@@ -63,6 +63,7 @@
     <Compile Include="Mocks\Store.cs" />
     <Compile Include="Mocks\TestQueryHandler.cs" />
     <Compile Include="Mocks\TestQueryHandlerDecorator.cs" />
+    <Compile Include="Mocks\TestQueryHandlerDecoratorAlt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

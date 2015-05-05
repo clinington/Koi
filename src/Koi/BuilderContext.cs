@@ -2,11 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
 
     using Koi.ConstructionStrategies;
     using Koi.DependencyFactories;
-    using Koi.TypeInitialisationStrategies;
+    using Koi.InstantiationStrategies;
 
     /// <summary>
     /// The builder context.
@@ -29,7 +30,7 @@
         /// <summary>
         /// The add construction.
         /// </summary>
-        /// <param name="typeInstantiationStrategy">
+        /// <param name="instantiationStrategy">
         /// The type initialisation strategy.
         /// </param>
         /// <param name="constructionStrategy">
@@ -49,9 +50,8 @@
         /// Thrown if two types are trying to be registered.
         /// </exception>
         public void AddConstruction(
-            ITypeInstantiationStrategy typeInstantiationStrategy,
+            IInstantiationStrategy instantiationStrategy,
             IConstructionStrategy constructionStrategy,
-            Lifetime lifetime,
             Type typeToConstruct,
             Type key,
             IDependencyFactory dependencyFactory)
@@ -64,10 +64,9 @@
             this.constructionMappings[key].Add(
                 new ConstructionDefinition(
                     typeToConstruct,
-                    typeInstantiationStrategy,
+                    instantiationStrategy,
                     constructionStrategy,
                     dependencyFactory,
-                    lifetime,
                     this));
         }
 
@@ -89,7 +88,7 @@
                 return null;
             }
 
-            return constructionDefinition.ConstructType().InstantiateType();
+            return constructionDefinition.ConstructType();
         }
 
         /// <summary>
@@ -111,17 +110,38 @@
 
                 var typesToResolve = this.constructionMappings.Where(x => genericTypes.Any(y => x.Key == y)).SelectMany(x => x.Value);
 
-                return typesToResolve.Select(x => x.ConstructType().InstantiateType());
+                return typesToResolve.Select(x => x.ConstructType());
             }
 
-            return this.constructionMappings[typeToConstruct].Select(x => x.ConstructType().InstantiateType());
+            return this.constructionMappings[typeToConstruct].Select(x => x.ConstructType());
         }
 
+        /// <summary>
+        /// The decorate construction.
+        /// </summary>
+        /// <param name="typeToDecorate">
+        /// The type to decorate.
+        /// </param>
+        /// <param name="decoratingTypes">
+        /// The decorating types.
+        /// </param>
         public void DecorateConstruction(Type typeToDecorate, List<Type> decoratingTypes)
         {
-            var constructionDefinition = this.constructionMappings[typeToDecorate];
+            var typeToDecorateInterface = typeToDecorate.GetInterfaces().FirstOrDefault();
 
-            constructionDefinition.
+            if (typeToDecorateInterface == null || !this.constructionMappings.ContainsKey(typeToDecorateInterface))
+            {
+                throw new KoiRegistrationException("Can't register a null or missing typeToDecorate");
+            }
+
+            var constructionDefinition = this.constructionMappings[typeToDecorateInterface].FirstOrDefault();
+            
+            if (constructionDefinition == null)
+            {
+                throw new KoiRegistrationException(string.Format("No construction mappings found for:\n\t{0}", typeToDecorateInterface));
+            }
+
+            constructionDefinition.Decorators = decoratingTypes;
         }
     }
 }

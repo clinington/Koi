@@ -1,17 +1,17 @@
-﻿namespace Koi.TypeInitialisationStrategies
+﻿namespace Koi.InstantiationStrategies
 {
     /// <summary>
-    /// The singleton type initialisation strategy.
+    /// The singleton instantiation strategy.
     /// </summary>
-    internal class SingletonTypeInstantiationStrategy : ITypeInstantiationStrategy
+    internal class SingletonInstantiationStrategy : IInstantiationStrategy
     {
         /// <summary>
-        /// The initialised type.
+        /// The instantiated type.
         /// </summary>
-        private object initialisedType;
+        private object instantiatedType;
 
         /// <summary>
-        /// The initialise type.
+        /// The instantiate type.
         /// </summary>
         /// <param name="dependency">
         /// The dependency.
@@ -21,12 +21,12 @@
         /// </returns>
         public object InstantiateType(IDependency dependency)
         {
-            if (this.initialisedType == null)
+            if (this.instantiatedType == null)
             {
-                this.initialisedType = new PerResolveTypeInstantiationStrategy().InstantiateType(dependency);
+                this.instantiatedType = new PerResolveInstantiationStrategy().InstantiateType(dependency);
             }
 
-            return this.initialisedType;
+            return this.instantiatedType;
         }
 
         /// <summary>

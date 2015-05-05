@@ -16,12 +16,12 @@
         /// <summary>
         /// The can handle.
         /// </summary>
-        /// <param name="initialisationStrategy">
-        /// The initialisation strategy.
+        /// <param name="instantiationStrategy">
+        /// The instantiation Strategy.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool CanHandle(InitialisationStrategy initialisationStrategy);
+        bool CanHandle(InstantiationStrategy instantiationStrategy);
     }
 }

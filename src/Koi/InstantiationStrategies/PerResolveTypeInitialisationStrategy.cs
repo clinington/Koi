@@ -1,15 +1,15 @@
-﻿namespace Koi.TypeInitialisationStrategies
+﻿namespace Koi.InstantiationStrategies
 {
     using System.Linq;
     using System.Reflection;
 
     /// <summary>
-    /// The transient type initialisation strategy.
+    /// The per resolve instantiation strategy.
     /// </summary>
-    internal class PerResolveTypeInstantiationStrategy : ITypeInstantiationStrategy
+    internal class PerResolveInstantiationStrategy : IInstantiationStrategy
     {
         /// <summary>
-        /// The initialise type.
+        /// The instantiate type.
         /// </summary>
         /// <param name="dependency">
         /// The dependency.

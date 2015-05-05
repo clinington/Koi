@@ -163,23 +163,63 @@
         }
 
         [TestMethod]
-        public void RegisterDecorator()
+        public void RegisterASingleDecorator()
         {
             // arrange
             this.container.RegisterType<IQueryHandler<TestQuery, string>, TestQueryHandler>(Lifetime.PerResolve);
-            this.container.RegisterType<IQueryHandler<TestQuery, string>, TestQueryHandlerDecorator>(Lifetime.PerResolve);
 
             this.container.RegisterDecorators(
                 typeof(TestQueryHandler),
                 new List<Type> { typeof(TestQueryHandlerDecorator) });
 
             // act
-            var tqh = (TestQueryHandler)this.container.Resolve(typeof(IQueryHandler<TestQuery, string>));
+            var queryHandlerClosedGeneric = this.container.Resolve(typeof(IQueryHandler<TestQuery, string>));
+            var response = ((TestQueryHandlerDecorator)queryHandlerClosedGeneric).Handle(new TestQuery());
 
-            var response = tqh.Handle(new TestQuery());
 
             // assert
+            Assert.IsInstanceOfType(queryHandlerClosedGeneric, typeof(TestQueryHandlerDecorator));
             Assert.AreEqual("Hey there", response);
+        }
+
+        [TestMethod]
+        public void RegisterMultipleDecorators()
+        {
+            // arrange
+            this.container.RegisterType<IQueryHandler<TestQuery, string>, TestQueryHandler>(Lifetime.PerResolve);
+
+            this.container.RegisterDecorators(
+                typeof(TestQueryHandler),
+                new List<Type> { typeof(TestQueryHandlerDecorator), typeof(TestQueryHandlerDecoratorAlt) });
+
+            // act
+            var queryHandlerClosedGeneric = this.container.Resolve(typeof(IQueryHandler<TestQuery, string>));
+            var response = ((TestQueryHandlerDecoratorAlt)queryHandlerClosedGeneric).Handle(new TestQuery());
+
+
+            // assert
+            Assert.IsInstanceOfType(queryHandlerClosedGeneric, typeof(TestQueryHandlerDecoratorAlt));
+            Assert.AreEqual("Hey there alt", response);
+        }
+
+        [TestMethod]
+        public void RegisterMultipleDecoratorsReversed()
+        {
+            // arrange
+            this.container.RegisterType<IQueryHandler<TestQuery, string>, TestQueryHandler>(Lifetime.PerResolve);
+
+            this.container.RegisterDecorators(
+                typeof(TestQueryHandler),
+                new List<Type> { typeof(TestQueryHandlerDecoratorAlt), typeof(TestQueryHandlerDecorator) });
+
+            // act
+            var queryHandlerClosedGeneric = this.container.Resolve(typeof(IQueryHandler<TestQuery, string>));
+            var response = ((TestQueryHandlerDecorator)queryHandlerClosedGeneric).Handle(new TestQuery());
+
+
+            // assert
+            Assert.IsInstanceOfType(queryHandlerClosedGeneric, typeof(TestQueryHandlerDecorator));
+            Assert.AreEqual("Hey alt there", response);
         }
     }
 

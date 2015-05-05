@@ -8,7 +8,7 @@
     internal class FactoryConstructionStrategy : IConstructionStrategy
     {
         /// <summary>
-        /// The factory func.
+        /// The factory function.
         /// </summary>
         private Func<object> factoryFunc;
 
@@ -16,7 +16,7 @@
         /// The set factory function.
         /// </summary>
         /// <param name="factoryFunc">
-        /// The factory func.
+        /// The factory function.
         /// </param>
         public void SetFactoryFunction(Func<object> factoryFunc)
         {
@@ -37,15 +37,15 @@
         /// <summary>
         /// The can handle.
         /// </summary>
-        /// <param name="initialisationStrategy">
-        /// The initialisation strategy.
+        /// <param name="instantiationStrategy">
+        /// The instantiation Strategy.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool CanHandle(InitialisationStrategy initialisationStrategy)
+        public bool CanHandle(InstantiationStrategy instantiationStrategy)
         {
-            return initialisationStrategy == InitialisationStrategy.FactoryControlled;
+            return instantiationStrategy == InstantiationStrategy.FactoryControlled;
         }
     }
 }

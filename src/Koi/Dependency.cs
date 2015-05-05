@@ -3,7 +3,7 @@
     using System;
 
     using Koi.ConstructionStrategies;
-    using Koi.TypeInitialisationStrategies;
+    using Koi.InstantiationStrategies;
 
     /// <summary>
     /// The dependency.
@@ -21,7 +21,7 @@
         /// <param name="builderContext">
         /// The builder Context.
         /// </param>
-        /// <param name="typeInstantiationStrategy">
+        /// <param name="instantiationStrategy">
         /// The type Initialisation Strategy.
         /// </param>
         /// <param name="constructionStrategy">
@@ -35,15 +35,13 @@
         /// </param>
         public Dependency(
             BuilderContext builderContext, 
-            ITypeInstantiationStrategy typeInstantiationStrategy, 
+            IInstantiationStrategy instantiationStrategy, 
             IConstructionStrategy constructionStrategy, 
-            Lifetime lifetime, 
             Type type)
         {
             this.ConstructionStrategy = constructionStrategy;
-            this.Lifetime = lifetime;
             this.Type = type;
-            this.TypeInstantiationStrategy = typeInstantiationStrategy;
+            this.InstantiationStrategy = instantiationStrategy;
             this.BuilderContext = builderContext;
         }
 
@@ -53,11 +51,6 @@
         public Type Type { get; private set; }
 
         /// <summary>
-        /// Gets the lifetime.
-        /// </summary>
-        public Lifetime Lifetime { get; private set; }
-
-        /// <summary>
         /// Gets the koi container.
         /// </summary>
         public BuilderContext BuilderContext { get; private set; }
@@ -65,36 +58,11 @@
         /// <summary>
         /// Gets the strategy.
         /// </summary>
-        public ITypeInstantiationStrategy TypeInstantiationStrategy { get; private set; }
+        public IInstantiationStrategy InstantiationStrategy { get; private set; }
 
         /// <summary>
         /// Gets the construction strategy.
         /// </summary>
         public IConstructionStrategy ConstructionStrategy { get; private set; }
-
-        /// <summary>
-        /// The initialise type.
-        /// </summary>
-        /// <param name="strategy">
-        /// The strategy.
-        /// </param>
-        /// <returns>
-        /// The <see cref="object"/>.
-        /// </returns>
-        public object InstantiateType()
-        {
-            object intialisedType = null;
-
-            try
-            {
-                intialisedType = this.TypeInstantiationStrategy.InstantiateType(this);
-            }
-            catch (Exception ex)
-            {
-                
-            }
-
-            return intialisedType;
-        }
     }
 }

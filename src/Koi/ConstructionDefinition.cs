@@ -1,10 +1,12 @@
 ﻿namespace Koi
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using Koi.ConstructionStrategies;
     using Koi.DependencyFactories;
-    using Koi.TypeInitialisationStrategies;
+    using Koi.InstantiationStrategies;
 
     /// <summary>
     /// The construction definition.
@@ -17,11 +19,6 @@
         private readonly IDependencyFactory dependencyFactory;
 
         /// <summary>
-        /// The lifetime.
-        /// </summary>
-        private readonly Lifetime lifetime;
-
-        /// <summary>
         /// The context.
         /// </summary>
         private readonly BuilderContext context;
@@ -32,9 +29,9 @@
         private readonly IConstructionStrategy constructionStrategy;
 
         /// <summary>
-        /// The type initialisation strategy.
+        /// The instantiation strategy.
         /// </summary>
-        private readonly ITypeInstantiationStrategy typeInstantiationStrategy;
+        private readonly IInstantiationStrategy instantiationStrategy;
 
         /// <summary>
         /// The type to construct.
@@ -47,8 +44,8 @@
         /// <param name="typeToConstruct">
         /// The type to construct.
         /// </param>
-        /// <param name="typeInstantiationStrategy">
-        /// The type initialisation strategy.
+        /// <param name="instantiationStrategy">
+        /// The instantiation strategy.
         /// </param>
         /// <param name="constructionStrategy">
         /// The construction strategy.
@@ -56,22 +53,27 @@
         /// <param name="dependencyFactory">
         /// The dependency factory.
         /// </param>
-        /// <param name="lifetime"></param>
+        /// <param name="context">
+        /// The context.
+        /// </param>
         public ConstructionDefinition(
             Type typeToConstruct, 
-            ITypeInstantiationStrategy typeInstantiationStrategy, 
+            IInstantiationStrategy instantiationStrategy, 
             IConstructionStrategy constructionStrategy, 
             IDependencyFactory dependencyFactory, 
-            Lifetime lifetime,
             BuilderContext context)
         {
             this.typeToConstruct = typeToConstruct;
-            this.typeInstantiationStrategy = typeInstantiationStrategy;
+            this.instantiationStrategy = instantiationStrategy;
             this.constructionStrategy = constructionStrategy;
             this.dependencyFactory = dependencyFactory;
-            this.lifetime = lifetime;
             this.context = context;
         }
+
+        /// <summary>
+        /// Gets or sets the decorators.
+        /// </summary>
+        public List<Type> Decorators { get; set; }
 
         /// <summary>
         /// The construct type.
@@ -79,14 +81,37 @@
         /// <returns>
         /// The <see cref="IDependency"/>.
         /// </returns>
-        public IDependency ConstructType()
+        public object ConstructType()
         {
-            return this.dependencyFactory.Create(
-                this.context,
-                this.typeInstantiationStrategy,
-                this.constructionStrategy,
-                this.lifetime,
-                this.typeToConstruct);
+            var dependency = this.dependencyFactory.Create(
+                    this.context,
+                    this.instantiationStrategy,
+                    this.constructionStrategy,
+                    this.typeToConstruct);
+
+            var instantiatedType = dependency.InstantiationStrategy.InstantiateType(dependency);
+
+            if (this.Decorators == null || !this.Decorators.Any())
+            {
+                return instantiatedType;
+            }
+
+            foreach (var decorator in this.Decorators)
+            {
+                var constructionStrat = new DecoratorConstructionStrategy
+                                            {
+                                                DecoratedInstance = instantiatedType,
+                                                Dependency = new Dependency(
+                                                    this.context,
+                                                    null,
+                                                    null,
+                                                    decorator)
+                                            };
+
+                instantiatedType = constructionStrat.ConstructType();    
+            }
+
+            return instantiatedType;
         }
     }
 }

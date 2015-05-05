@@ -3,7 +3,7 @@
     using System;
 
     using Koi.ConstructionStrategies;
-    using Koi.TypeInitialisationStrategies;
+    using Koi.InstantiationStrategies;
 
     /// <summary>
     /// The Dependency interface.
@@ -16,11 +16,6 @@
         Type Type { get; }
 
         /// <summary>
-        /// Gets the lifetime.
-        /// </summary>
-        Lifetime Lifetime { get; }
-
-        /// <summary>
         /// Gets the koi container.
         /// </summary>
         BuilderContext BuilderContext { get; }
@@ -28,19 +23,11 @@
         /// <summary>
         /// Gets the type instantiation strategy.
         /// </summary>
-        ITypeInstantiationStrategy TypeInstantiationStrategy { get; }
+        IInstantiationStrategy InstantiationStrategy { get; }
 
         /// <summary>
         /// Gets the construction strategy.
         /// </summary>
         IConstructionStrategy ConstructionStrategy { get; }
-
-        /// <summary>
-        /// The instantiate type.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="object"/>.
-        /// </returns>
-        object InstantiateType();
     }
 }

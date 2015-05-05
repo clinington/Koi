@@ -6,7 +6,7 @@
 
     using Koi.ConstructionStrategies;
     using Koi.DependencyFactories;
-    using Koi.TypeInitialisationStrategies;
+    using Koi.InstantiationStrategies;
 
     /// <summary>
     /// The koi container.
@@ -21,12 +21,12 @@
         /// <summary>
         /// The strategies.
         /// </summary>
-        private readonly List<ITypeInstantiationStrategy> typeInitialisationStrategies;
+        private readonly List<IInstantiationStrategy> typeInitialisationStrategies;
 
         /// <summary>
-        /// The construction stategies.
+        /// The construction strategies.
         /// </summary>
-        private readonly List<IConstructionStrategy> constructionStategies;
+        private readonly List<IConstructionStrategy> constructionStrategies;
 
         /// <summary>
         /// The builder context.
@@ -38,13 +38,13 @@
         /// </summary>
         public KoiContainer()
         {
-            this.typeInitialisationStrategies = new List<ITypeInstantiationStrategy>
+            this.typeInitialisationStrategies = new List<IInstantiationStrategy>
                                             {
-                                                new SingletonTypeInstantiationStrategy(),
-                                                new PerResolveTypeInstantiationStrategy()
+                                                new SingletonInstantiationStrategy(),
+                                                new PerResolveInstantiationStrategy()
                                             };
 
-            this.constructionStategies = new List<IConstructionStrategy>
+            this.constructionStrategies = new List<IConstructionStrategy>
                                             {
                                                 new EmptyConstructorConstructionStrategy(),
                                                 new FactoryConstructionStrategy()
@@ -70,7 +70,7 @@
         public void RegisterInstance<TConcrete>(Func<object> factory, Lifetime lifetime)
         {
             var typeInitialisationStrategy = this.typeInitialisationStrategies.First(x => x.CanHandle(lifetime));
-            var constructionStrategy = this.constructionStategies.First(x => x.CanHandle(InitialisationStrategy.FactoryControlled));
+            var constructionStrategy = this.constructionStrategies.First(x => x.CanHandle(InstantiationStrategy.FactoryControlled));
 
             var factoryInstanceDependencyFactory = new FactoryInstanceDependencyFactory
                                                        {
@@ -82,7 +82,6 @@
             this.builderContext.AddConstruction(
                 typeInitialisationStrategy,
                 constructionStrategy,
-                lifetime,
                 type,
                 type,
                 factoryInstanceDependencyFactory);
@@ -126,14 +125,13 @@
                 }
 
                 var typeInitialisationStrategy = this.typeInitialisationStrategies.First(x => x.CanHandle(lifetime));
-                var constructionStrategy = this.constructionStategies.First(x => x.CanHandle(InitialisationStrategy.LifetimeControlled));
+                var constructionStrategy = this.constructionStrategies.First(x => x.CanHandle(InstantiationStrategy.LifetimeControlled));
 
                 var emptyConstructorDependencyFactory = new EmptyConstructorDependencyFactory();
 
                 this.builderContext.AddConstruction(
                     typeInitialisationStrategy,
                     constructionStrategy,
-                    lifetime,
                     typeTo, 
                     typeFrom,
                     emptyConstructorDependencyFactory);

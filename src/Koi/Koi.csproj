@@ -43,6 +43,7 @@
     <Compile Include="ConstructionDefinition.cs" />
     <Compile Include="ConstructionStrategies\ConstructorConstructionStrategy.cs" />
     <Compile Include="ConstructionStrategies\EmptyConstructorConstructionStrategy.cs" />
+    <Compile Include="KoiResolutionException.cs" />
     <Compile Include="Dependency.cs" />
     <Compile Include="ConstructionStrategies\IConstructionStrategy.cs" />
     <Compile Include="DependencyFactories\EmptyConstructorDependencyFactory.cs" />
@@ -52,14 +53,15 @@
     <Compile Include="IDependency.cs" />
     <Compile Include="IKoiContainer.cs" />
     <Compile Include="InitialisationStrategy.cs" />
+    <Compile Include="ConstructionStrategies\DecoratorConstructionStrategy.cs" />
     <Compile Include="KoiContainerExtensions.cs" />
     <Compile Include="KoiRegistrationException.cs" />
     <Compile Include="Lifetime.cs" />
-    <Compile Include="TypeInitialisationStrategies\ITypeInstantiationStrategy.cs" />
+    <Compile Include="InstantiationStrategies\ITypeInstantiationStrategy.cs" />
     <Compile Include="KoiContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TypeInitialisationStrategies\SingletonTypeInitialisationStrategy.cs" />
-    <Compile Include="TypeInitialisationStrategies\PerResolveTypeInitialisationStrategy.cs" />
+    <Compile Include="InstantiationStrategies\SingletonTypeInitialisationStrategy.cs" />
+    <Compile Include="InstantiationStrategies\PerResolveTypeInitialisationStrategy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

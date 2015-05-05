@@ -3,7 +3,7 @@
     using System;
 
     using Koi.ConstructionStrategies;
-    using Koi.TypeInitialisationStrategies;
+    using Koi.InstantiationStrategies;
 
     /// <summary>
     /// The DependencyBuilder interface.
@@ -16,14 +16,11 @@
         /// <param name="builderContext">
         /// The builder context.
         /// </param>
-        /// <param name="typeInstantiationStrategy">
+        /// <param name="instantiationStrategy">
         /// The type instantiation strategy.
         /// </param>
         /// <param name="constructionStrategy">
         /// The construction strategy.
-        /// </param>
-        /// <param name="lifetime">
-        /// The lifetime.
         /// </param>
         /// <param name="type">
         /// The type.
@@ -33,9 +30,8 @@
         /// </returns>
         IDependency Create(
             BuilderContext builderContext, 
-            ITypeInstantiationStrategy typeInstantiationStrategy, 
+            IInstantiationStrategy instantiationStrategy, 
             IConstructionStrategy constructionStrategy, 
-            Lifetime lifetime, 
             Type type);
     }
 }

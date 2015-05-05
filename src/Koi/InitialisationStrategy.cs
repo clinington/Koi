@@ -1,11 +1,18 @@
 ﻿namespace Koi
 {
     /// <summary>
-    /// The initialisation strategy.
+    /// The instantiation strategy.
     /// </summary>
-    internal enum InitialisationStrategy
+    internal enum InstantiationStrategy
     {
+        /// <summary>
+        /// The lifetime controlled.
+        /// </summary>
         LifetimeControlled,
+
+        /// <summary>
+        /// The factory controlled.
+        /// </summary>
         FactoryControlled
     }
 }

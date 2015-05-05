@@ -1,9 +1,9 @@
-﻿namespace Koi.TypeInitialisationStrategies
+﻿namespace Koi.InstantiationStrategies
 {
     /// <summary>
-    /// The TypeInstantiationStrategy interface.
+    /// The InstantiationStrategy interface.
     /// </summary>
-    internal interface ITypeInstantiationStrategy
+    internal interface IInstantiationStrategy
     {
         /// <summary>
         /// The type instantiation method.

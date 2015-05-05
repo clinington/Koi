@@ -3,7 +3,7 @@
     using System;
 
     using Koi.ConstructionStrategies;
-    using Koi.TypeInitialisationStrategies;
+    using Koi.InstantiationStrategies;
 
     /// <summary>
     /// The factory instance dependency factory.
@@ -21,14 +21,11 @@
         /// <param name="builderContext">
         /// The builder context.
         /// </param>
-        /// <param name="typeInstantiationStrategy">
+        /// <param name="instantiationStrategy">
         /// The type instantiation strategy.
         /// </param>
         /// <param name="constructionStrategy">
         /// The construction strategy.
-        /// </param>
-        /// <param name="lifetime">
-        /// The lifetime.
         /// </param>
         /// <param name="type">
         /// The type.
@@ -39,7 +36,7 @@
         /// <exception cref="KoiRegistrationException">
         /// Thrown if Construction factory isn't of type FactoryConstructionStrategy
         /// </exception>
-        public IDependency Create(BuilderContext builderContext, ITypeInstantiationStrategy typeInstantiationStrategy, IConstructionStrategy constructionStrategy, Lifetime lifetime, Type type)
+        public IDependency Create(BuilderContext builderContext, IInstantiationStrategy instantiationStrategy, IConstructionStrategy constructionStrategy, Type type)
         {
             var factoryConstructionStrategy = constructionStrategy as FactoryConstructionStrategy;
 
@@ -50,7 +47,7 @@
 
             factoryConstructionStrategy.SetFactoryFunction(this.ConstructionFactory);
 
-            return new Dependency(builderContext, typeInstantiationStrategy, factoryConstructionStrategy, lifetime, type);
+            return new Dependency(builderContext, instantiationStrategy, factoryConstructionStrategy, type);
         }
     }
 }
