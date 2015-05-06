@@ -173,6 +173,20 @@
         }
 
         /// <summary>
+        /// The register decorators.
+        /// </summary>
+        /// <param name="typeToDecorate">
+        /// The type to decorate.
+        /// </param>
+        /// <param name="decoratingTypes">
+        /// The decorating types.
+        /// </param>
+        public void RegisterDecorators(Type typeToDecorate, List<Type> decoratingTypes)
+        {
+            this.builderContext.DecorateConstruction(typeToDecorate, decoratingTypes);
+        }
+
+        /// <summary>
         /// The dispose.
         /// </summary>
         public void Dispose()
@@ -211,11 +225,6 @@
             }
 
             this.typeDictionary[from].Add(to);
-        }
-
-        public void RegisterDecorators(Type typeToDecorate, List<Type> decoratingTypes)
-        {
-            this.builderContext.DecorateConstruction(typeToDecorate, decoratingTypes);
         }
     }
 }
