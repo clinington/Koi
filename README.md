@@ -12,8 +12,8 @@ A more literal translation is: a random name given to my Dependency Injection Fr
 
 ###Important Notes
 
-1) There is no circular dependency checking - yet.
-2) You can register multiple types to a single interface - but at the moment you get the first one registered.
+1. There is no circular dependency checking - yet.
+2. You can register multiple types to a single interface - but at the moment you get the first one registered.
 
 ###Getting Started
 
